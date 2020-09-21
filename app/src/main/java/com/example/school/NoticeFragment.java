@@ -20,11 +20,6 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Locale;
-
 public class NoticeFragment extends Fragment {
     String NoticeTitleString[] = {"네트워크 연결 없음","네트워크 연결 없음","네트워크 연결 없음","네트워크 연결 없음","네트워크 연결 없음","네트워크 연결 없음","네트워크 연결 없음","네트워크 연결 없음","네트워크 연결 없음","네트워크 연결 없음"};
     String NoticeWriterString[] = {"NO NETWORK","NO NETWORK","NO NETWORK","NO NETWORK","NO NETWORK","NO NETWORK","NO NETWORK","NO NETWORK","NO NETWORK","NO NETWORK"};
