@@ -14,9 +14,10 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="?attr/actionBarSize"
             android:background="#2f80ed"
-            android:padding="5dp">
+            android:padding="5dp"
+            android:gravity="center">
             <ImageView
                 android:id="@+id/btn_open"
                 android:layout_width="30dp"
@@ -28,7 +29,8 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:layout_marginRight="30dp"
-                android:fontFamily="@font/tttogether"
+                android:fontFamily="@font/nanumsquareeb"
+                android:textStyle="bold"
                 android:textColor="#fff"
                 android:textSize="24dp"
                 android:text="부산 대신중학교"/>
