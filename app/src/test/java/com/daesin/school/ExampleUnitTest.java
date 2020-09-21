@@ -1,4 +1,4 @@
-package com.example.school;
+package com.daesin.school;
 
 import org.junit.Test;
 

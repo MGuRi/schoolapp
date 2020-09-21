@@ -1,4 +1,4 @@
-package com.example.school;
+package com.daesin.school;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -11,19 +11,15 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+
+import com.daesin.school.R;
 
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Locale;
 
 public class LetterFragment extends Fragment {
     String letterTitleString[] = {"네트워크 연결 없음","네트워크 연결 없음","네트워크 연결 없음","네트워크 연결 없음","네트워크 연결 없음","네트워크 연결 없음","네트워크 연결 없음","네트워크 연결 없음","네트워크 연결 없음","네트워크 연결 없음"};

@@ -1,4 +1,4 @@
-package com.example.school;
+package com.daesin.school;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -11,6 +11,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
+import com.daesin.school.R;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
