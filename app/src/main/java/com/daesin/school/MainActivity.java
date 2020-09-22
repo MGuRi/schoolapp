@@ -148,7 +148,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.alarm:
-                Toast.makeText(this, "테스트", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(getApplicationContext(), NoticeActivity.class));
         }
         return super.onOptionsItemSelected(item);
     }
