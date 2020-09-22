@@ -3,6 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item android:id="@+id/alarm"
         android:icon="@drawable/ic_alarm"
-        android:title="item 1"
+        android:title="공지사항"
         app:showAsAction="always"/>
 </menu>
