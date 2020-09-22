@@ -36,8 +36,9 @@ class NoticeFragment : Fragment() {
                 noticeList.add(NoticeData(title = tr.select("td:nth-child(2)").text(),
                         writer = tr.select("td:nth-child(3)").text(),
                         date = tr.select("td:nth-child(4)").text(),
+                        link = tr.select("a").attr("href"),
                         file = tr.select("img").hasAttr("src"),
-                        link = tr.select("a").attr("href")))
+                        important = tr.select("td:nth-child(1)").text() == "공지"))
             }
 
             /**코루틴 상태에서 바로 연결시켜버리면 에러뜸 쓰레드가 필요

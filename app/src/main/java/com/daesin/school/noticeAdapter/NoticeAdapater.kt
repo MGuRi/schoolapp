@@ -26,6 +26,8 @@ class NoticeAdapater(private val noticeList: ArrayList<NoticeData>): RecyclerVie
             with(holder.itemView) {
                 if (file)
                     notice_file.visibility = View.VISIBLE
+                if (important)
+                    noti_important.visibility = View.VISIBLE
                 notice_title.text = title
                 notice_writer.text = writer
                 notice_date.text = date
