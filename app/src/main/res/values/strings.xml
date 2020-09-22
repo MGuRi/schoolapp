@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">School</string>
+    <string name="navigation_drawer_open">open navigation</string>
+    <string name="navigation_drawer_close">close navigation</string>
 </resources>
