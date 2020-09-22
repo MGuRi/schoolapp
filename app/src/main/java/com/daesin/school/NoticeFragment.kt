@@ -21,16 +21,15 @@ class NoticeFragment : Fragment() {
     private val noticeList: ArrayList<NoticeData> = ArrayList()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val holder = inflater.inflate(R.layout.fragment_notice, container, false)
         parse()
-        return holder
+        return inflater.inflate(R.layout.fragment_notice, container, false)
     }
 
     private fun parse() {
         //코루틴은 asyncTask랑 비슷한 역활을해줌 비동기 코드 동작
         GlobalScope.launch(Dispatchers.IO) {
             //50개 가져옴
-            val jsoup = Jsoup.connect("http://school.busanedu.net/daesin-m/na/ntt/selectNttList.do?mi=618566&bbsId=1011229&&listCo=50").get()
+            val jsoup = Jsoup.connect("http://school.busanedu.net/daesin-m/na/ntt/selectNttList.do?mi=618566&bbsId=1011229&&listCo=20").get()
             val document = jsoup.select("tbody tr")
             for (tr in document) {
                 //차례대로 제목, 작성자, 날짜, 첨부파일, 링크 확인

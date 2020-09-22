@@ -12,29 +12,50 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <LinearLayout
+        <!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="?attr/actionBarSize"-->
+<!--            android:background="@color/white"-->
+<!--            android:padding="5dp">-->
+<!--&lt;!&ndash;            <ImageView&ndash;&gt;-->
+<!--&lt;!&ndash;                android:id="@+id/btn_open"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_width="30dp"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_height="30dp"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:src="@drawable/icon_menu"/>&ndash;&gt;-->
+
+<!--            <ImageView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:src="@drawable/logo"-->
+<!--                android:layout_gravity="center_horizontal|center"/>-->
+
+<!--&lt;!&ndash;            <TextView&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_width="match_parent"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_height="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:gravity="center"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_marginRight="30dp"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:fontFamily="@font/nanumsquareeb"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:textStyle="bold"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:textColor="#fff"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:textSize="24dp"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:text="부산 대신중학교"/>&ndash;&gt;-->
+<!--        </LinearLayout>-->
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="#2f80ed"
-            android:padding="5dp"
-            android:gravity="center">
-            <ImageView
-                android:id="@+id/btn_open"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:src="@drawable/icon_menu"/>
+            android:background="@color/white"
+            android:theme="@style/ThemeOverlay.AppCompat.Light">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:layout_marginRight="30dp"
-                android:fontFamily="@font/nanumsquareeb"
-                android:textStyle="bold"
-                android:textColor="#fff"
-                android:textSize="24dp"
-                android:text="부산 대신중학교"/>
-        </LinearLayout>
+            <ImageView
+                android:layout_width="200dp"
+                android:layout_height="39dp"
+                android:layout_gravity="center_horizontal|center|center_vertical"
+                android:contentDescription="대신중 로고"
+                android:src="@drawable/logo" />
+
+        </androidx.appcompat.widget.Toolbar>
 
         <fragment
             android:id="@+id/fragment"
