@@ -40,38 +40,50 @@ public class NoticeFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(inflater.getContext()));
         recyclerView.setAdapter(new NoticeFragmentRecyclerView());
 
+
         return view;
     }
 
-    class NoticeFragmentRecyclerView extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
+    class NoticeFragmentRecyclerView extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         List<NoticeItemModel> noticeModels;
-        public NoticeFragmentRecyclerView(){
-            try {
-                noticeModels = new ArrayList<>();
-                noticeModels.clear();
-                Connection.Response response = Jsoup.connect("http://school.busanedu.net/daesin-m/na/ntt/selectNttList.do?mi=618566&bbsId=1011229&&listCo=20")
-                        .method(Connection.Method.GET)
-                        .execute();
-                Document document = response.parse();
 
-                Elements noticeItems = document.select("tbody tr");
-                for(Element noticeItem: noticeItems) {
-                    NoticeItemModel noticeItemModel = new NoticeItemModel();
+        public NoticeFragmentRecyclerView() {
+            new Thread() {
+                public void run() {
+                    try {
+                        noticeModels = new ArrayList<>();
+                        noticeModels.clear();
+                        Connection.Response response = Jsoup.connect("http://school.busanedu.net/daesin-m/na/ntt/selectNttList.do?mi=618566&bbsId=1011229&&listCo=20")
+                                .method(Connection.Method.GET)
+                                .execute();
+                        Document document = response.parse();
 
-                    noticeItemModel.title = noticeItem.select("td:nth-child(2)").text();
-                    noticeItemModel.writer = noticeItem.select("td:nth-child(3)").text();
-                    noticeItemModel.date = noticeItem.select("td:nth-child(4)").text();
-                    noticeItemModel.url = noticeItem.select("a").attr("href");
-                    noticeItemModel.file_exists = noticeItem.select("img").hasAttr("src");
-                    noticeItemModel.isimportant = noticeItem.select("td:nth-child(1)").text() == "공지";
-                    noticeModels.add(noticeItemModel);
+                        Elements noticeItems = document.select("tbody tr");
+                        for (Element noticeItem : noticeItems) {
+                            NoticeItemModel noticeItemModel = new NoticeItemModel();
 
-                    System.out.println(noticeItem);
+                            noticeItemModel.title = noticeItem.select("td:nth-child(2)").text();
+                            noticeItemModel.writer = noticeItem.select("td:nth-child(3)").text();
+                            noticeItemModel.date = noticeItem.select("td:nth-child(4)").text();
+                            noticeItemModel.url = noticeItem.select("a").attr("href");
+                            noticeItemModel.file_exists = noticeItem.select("img").hasAttr("src");
+                            noticeItemModel.isimportant = noticeItem.select("td:nth-child(1)").text().equals("공지");
+                            noticeModels.add(noticeItemModel);
+
+                            System.out.println(noticeItemModel.title);
+                            System.out.println(noticeItemModel.writer);
+                            System.out.println(noticeItemModel.date);
+                            System.out.println(noticeItemModel.url);
+                            System.out.println(noticeItemModel.file_exists);
+                            System.out.println(noticeItemModel.isimportant + "\n");
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
                 }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            }.start();
         }
 
         @NonNull
@@ -83,20 +95,21 @@ public class NoticeFragment extends Fragment {
         }
 
         @Override
-        public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-            ((CustomViewHolder)holder).noticeTitle.setText(noticeModels.get(position).title);
-            ((CustomViewHolder)holder).noticeWriter.setText(noticeModels.get(position).writer);
-            ((CustomViewHolder)holder).noticeDate.setText(noticeModels.get(position).date);
+        public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int position) {
+            ((CustomViewHolder) holder).noticeTitle.setText(noticeModels.get(position).title);
+            ((CustomViewHolder) holder).noticeWriter.setText(noticeModels.get(position).writer);
+            ((CustomViewHolder) holder).noticeDate.setText(noticeModels.get(position).date);
             if (noticeModels.get(position).file_exists) {
-                ((CustomViewHolder)holder).noticeFileExists.setVisibility(View.VISIBLE);
+                ((CustomViewHolder) holder).noticeFileExists.setVisibility(View.VISIBLE);
             } else {
-                ((CustomViewHolder)holder).noticeFileExists.setVisibility(View.GONE);
+                ((CustomViewHolder) holder).noticeFileExists.setVisibility(View.GONE);
             }
             System.out.println("onBindViewHolder");
         }
 
         @Override
         public int getItemCount() {
+            System.out.println("NoticeFragment : getItemCount()");
             return noticeModels.size();
         }
 
