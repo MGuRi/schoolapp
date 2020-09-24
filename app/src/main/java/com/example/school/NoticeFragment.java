@@ -38,45 +38,38 @@ public class NoticeFragment extends Fragment {
 
         final RecyclerView recyclerView = view.findViewById(R.id.noticeFragment_recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(inflater.getContext()));
-        getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                recyclerView.setAdapter(new NoticeFragmentRecyclerView());
-            }
-        });
-
-
+        recyclerView.setAdapter(new NoticeFragmentRecyclerView());
 
         return view;
     }
 
-    class NoticeFragmentRecyclerView extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+    class NoticeFragmentRecyclerView extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
         List<NoticeItemModel> noticeModels;
-        public NoticeFragmentRecyclerView() {
+        public NoticeFragmentRecyclerView(){
             try {
-            noticeModels = new ArrayList<>();
-            noticeModels.clear();
-            Connection.Response response = Jsoup.connect("http://school.busanedu.net/daesin-m/na/ntt/selectNttList.do?mi=618566&bbsId=1011229&&listCo=20")
-                    .method(Connection.Method.GET)
-                    .execute();
-            Document document = response.parse();
+                noticeModels = new ArrayList<>();
+                noticeModels.clear();
+                Connection.Response response = Jsoup.connect("http://school.busanedu.net/daesin-m/na/ntt/selectNttList.do?mi=618566&bbsId=1011229&&listCo=20")
+                        .method(Connection.Method.GET)
+                        .execute();
+                Document document = response.parse();
 
-            Elements noticeItems = document.select("tbody tr");
-            for(Element noticeItem: noticeItems) {
-                NoticeItemModel noticeItemModel = new NoticeItemModel();
+                Elements noticeItems = document.select("tbody tr");
+                for(Element noticeItem: noticeItems) {
+                    NoticeItemModel noticeItemModel = new NoticeItemModel();
 
-                noticeItemModel.title = noticeItem.select("td:nth-child(2)").text();
-                noticeItemModel.writer = noticeItem.select("td:nth-child(3)").text();
-                noticeItemModel.date = noticeItem.select("td:nth-child(4)").text();
-                noticeItemModel.url = noticeItem.select("a").attr("href");
-                noticeItemModel.file_exists = noticeItem.select("img").hasAttr("src");
-                noticeItemModel.isimportant = noticeItem.select("td:nth-child(1)").text() == "공지";
-                noticeModels.add(noticeItemModel);
+                    noticeItemModel.title = noticeItem.select("td:nth-child(2)").text();
+                    noticeItemModel.writer = noticeItem.select("td:nth-child(3)").text();
+                    noticeItemModel.date = noticeItem.select("td:nth-child(4)").text();
+                    noticeItemModel.url = noticeItem.select("a").attr("href");
+                    noticeItemModel.file_exists = noticeItem.select("img").hasAttr("src");
+                    noticeItemModel.isimportant = noticeItem.select("td:nth-child(1)").text() == "공지";
+                    noticeModels.add(noticeItemModel);
 
-                System.out.println(noticeItem);
-            }
-            } catch (Exception e) {
+                    System.out.println(noticeItem);
+                }
+            } catch (IOException e) {
                 e.printStackTrace();
             }
         }
@@ -92,9 +85,14 @@ public class NoticeFragment extends Fragment {
         @Override
         public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
             ((CustomViewHolder)holder).noticeTitle.setText(noticeModels.get(position).title);
-            ((CustomViewHolder)holder).noticeWriter.setText(noticeModels.get(position).title);
-            ((CustomViewHolder)holder).noticeDate.setText(noticeModels.get(position).title);
-            ((CustomViewHolder)holder).noticeFileExists.setVisibility(noticeModels.get(position).file_exists);
+            ((CustomViewHolder)holder).noticeWriter.setText(noticeModels.get(position).writer);
+            ((CustomViewHolder)holder).noticeDate.setText(noticeModels.get(position).date);
+            if (noticeModels.get(position).file_exists) {
+                ((CustomViewHolder)holder).noticeFileExists.setVisibility(View.VISIBLE);
+            } else {
+                ((CustomViewHolder)holder).noticeFileExists.setVisibility(View.GONE);
+            }
+            System.out.println("onBindViewHolder");
         }
 
         @Override
