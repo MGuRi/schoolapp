@@ -52,7 +52,7 @@ class HomeFragment : Fragment() {
             getList(noticeUrl, notice)
             getList(letterUrl, letter)
             //칭찬합시다 불러오는부분 오류나서 주석처리
-//            val jsoup = Jsoup.connect(praiseUrl).get()
+//            val jsoup = Jsoup.connect(praiseUrl).get
 //            val doc = jsoup.select(".widgDiv notice1051 > div:nth-child(4)")
 //            Log.d("noti", doc.html())
 //            for (ele in doc) {
