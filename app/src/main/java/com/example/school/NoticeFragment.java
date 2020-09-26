@@ -37,9 +37,9 @@ public class NoticeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_notice, container, false);
 
         final RecyclerView recyclerView = view.findViewById(R.id.noticeFragment_recyclerview);
-        recyclerView.setLayoutManager(new LinearLayoutManager(inflater.getContext()));
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(new NoticeFragmentRecyclerView());
-
+        System.out.println("============================================");
 
         return view;
     }
@@ -47,13 +47,10 @@ public class NoticeFragment extends Fragment {
     class NoticeFragmentRecyclerView extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         List<NoticeItemModel> noticeModels;
-
         public NoticeFragmentRecyclerView() {
             new Thread() {
                 public void run() {
                     try {
-                        noticeModels = new ArrayList<>();
-                        noticeModels.clear();
                         Connection.Response response = Jsoup.connect("http://school.busanedu.net/daesin-m/na/ntt/selectNttList.do?mi=618566&bbsId=1011229&&listCo=20")
                                 .method(Connection.Method.GET)
                                 .execute();
@@ -78,10 +75,11 @@ public class NoticeFragment extends Fragment {
                             System.out.println(noticeItemModel.file_exists);
                             System.out.println(noticeItemModel.isimportant + "\n");
                         }
+//                        notifyDataSetChanged();
                     } catch (IOException e) {
                         e.printStackTrace();
+                        System.out.println("===============IOException Error================");
                     }
-
                 }
             }.start();
         }
@@ -96,35 +94,38 @@ public class NoticeFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int position) {
-            ((CustomViewHolder) holder).noticeTitle.setText(noticeModels.get(position).title);
-            ((CustomViewHolder) holder).noticeWriter.setText(noticeModels.get(position).writer);
-            ((CustomViewHolder) holder).noticeDate.setText(noticeModels.get(position).date);
-            if (noticeModels.get(position).file_exists) {
-                ((CustomViewHolder) holder).noticeFileExists.setVisibility(View.VISIBLE);
-            } else {
-                ((CustomViewHolder) holder).noticeFileExists.setVisibility(View.GONE);
-            }
             System.out.println("onBindViewHolder");
+//            ((CustomViewHolder) holder).noticeTitle.setText(noticeModels.get(position).title);
+            ((CustomViewHolder) holder).noticeTitle.setText("TEST TITLE");
+//            ((CustomViewHolder) holder).noticeWriter.setText(noticeModels.get(position).writer);
+//            ((CustomViewHolder) holder).noticeDate.setText(noticeModels.get(position).date);
+//            if (noticeModels.get(position).file_exists) {
+//                ((CustomViewHolder) holder).noticeFileExists.setVisibility(View.VISIBLE);
+//            } else {
+//                ((CustomViewHolder) holder).noticeFileExists.setVisibility(View.GONE);
+//            }
+            System.out.println("onBindViewHolder Close");
         }
 
         @Override
         public int getItemCount() {
             System.out.println("NoticeFragment : getItemCount()");
-            return noticeModels.size();
+//            return noticeModels.size();
+            return 0;
         }
 
         private class CustomViewHolder extends RecyclerView.ViewHolder {
             public TextView noticeTitle;
             public TextView noticeWriter;
             public TextView noticeDate;
-            public ImageView noticeFileExists;
+//            public ImageView noticeFileExists;
 
             public CustomViewHolder(View view) {
                 super(view);
                 noticeTitle = view.findViewById(R.id.itemNotice_title);
                 noticeWriter = view.findViewById(R.id.itemNotice_writer);
                 noticeDate = view.findViewById(R.id.itemNotice_date);
-                noticeFileExists = view.findViewById(R.id.itemNotice_fileExists);
+//                noticeFileExists = view.findViewById(R.id.itemNotice_fileExists);
 
             }
         }
